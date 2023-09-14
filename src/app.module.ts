@@ -6,6 +6,8 @@ import { User } from './Users/user.model';
 import { Categorie } from './Categories/categorie.model';
 import { Sous_Categorie } from './Sous-Categories/sous-categorie.model';
 import { Config } from './Config/config';
+import { UserModule } from './Users/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,14 +18,11 @@ import { Config } from './Config/config';
       username: Config.DB_USER,
       password: Config.DB_PASSWORD,
       database: Config.DB_NAME,
-      // host: 'localhost',
-      // port: 8889,
-      // username: 'root',
-      // password: 'root',
-      // database: 'mybudget',
       entities: [User, Categorie, Sous_Categorie],
       synchronize: true, // Utilisez "false" en production
     }),
+    UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
