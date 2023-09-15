@@ -8,6 +8,7 @@ import { Sous_Categorie } from './Sous-Categories/sous-categorie.model';
 import { Config } from './Config/config';
 import { UserModule } from './Users/user.module';
 import { AuthModule } from './auth/auth.module';
+import { CategorieModule } from './Categories/categorie.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AuthModule } from './auth/auth.module';
     }),
     UserModule,
     AuthModule,
+    CategorieModule,
   ],
   controllers: [AppController],
   providers: [AppService],
