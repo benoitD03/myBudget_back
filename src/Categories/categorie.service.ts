@@ -17,4 +17,9 @@ export class CategoriesService {
     const result = await this.categories.find(options);
     return result;
   }
+
+  async createCategorie(categorieData: Categorie): Promise<any> {
+    const categorie = this.categories.create(categorieData);
+    return this.categories.save(categorie);
+  }
 }

@@ -26,7 +26,7 @@ export class Sous_Categorie {
   Somme: number;
 
   @Column()
-  Couleur: boolean;
+  Couleur: string;
 
   @ManyToOne(() => User, (user) => user.sous_categorie)
   user: User;

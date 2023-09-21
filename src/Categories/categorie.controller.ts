@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Post,
   HttpCode,
   HttpStatus,
   UseGuards,
@@ -19,5 +20,12 @@ export class CategoriesController {
   @Get('all')
   findAllByUserId(@Body() findAllCategoriesDto): Promise<Categorie[]> {
     return this.categoriesService.findAllByUserId(findAllCategoriesDto.user);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard)
+  @Post()
+  createCategorie(@Body() categorieData: Categorie): Promise<any> {
+    return this.categoriesService.createCategorie(categorieData);
   }
 }
