@@ -9,6 +9,7 @@ import { Config } from './Config/config';
 import { UserModule } from './Users/user.module';
 import { AuthModule } from './auth/auth.module';
 import { CategorieModule } from './Categories/categorie.module';
+import { SousCategorieModule } from './Sous-Categories/sous-categorie.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { CategorieModule } from './Categories/categorie.module';
     UserModule,
     AuthModule,
     CategorieModule,
+    SousCategorieModule,
   ],
   controllers: [AppController],
   providers: [AppService],
