@@ -5,8 +5,8 @@ import {
   Post,
   HttpCode,
   HttpStatus,
-  UseGuards,
-} from '@nestjs/common';
+  UseGuards, Query
+} from "@nestjs/common";
 import { Categorie } from './categorie.model';
 import { CategoriesService } from './categorie.service';
 import { AuthGuard } from '../auth/aut.guard';
@@ -18,8 +18,8 @@ export class CategoriesController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
   @Get('all')
-  findAllByUserId(@Body() findAllCategoriesDto): Promise<Categorie[]> {
-    return this.categoriesService.findAllByUserId(findAllCategoriesDto.user);
+  findAllByUserId(@Query() query): Promise<Categorie[]> {
+    return this.categoriesService.findAllByUserId(query);
   }
 
   @HttpCode(HttpStatus.OK)

@@ -6,8 +6,10 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { Sous_Categorie } from './sous-categorie.model';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { SousCategoriesService } from './sous-categorie.service';
 import { AuthGuard } from '../auth/aut.guard';
 
@@ -18,12 +20,8 @@ export class SousCategoriesController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
   @Get('all')
-  findAllByCategorieId(
-    @Body() findAllSousCategoriesDto,
-  ): Promise<Sous_Categorie[]> {
-    return this.SousCategoriesService.findAllByCategorieId(
-      findAllSousCategoriesDto.categorie,
-    );
+  findAllByUserId(@Query() query): Promise<Sous_Categorie[] | undefined> {
+    return this.SousCategoriesService.findAllByCategorieId(query);
   }
 
   @HttpCode(HttpStatus.OK)
