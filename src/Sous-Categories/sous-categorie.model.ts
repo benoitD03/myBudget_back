@@ -17,9 +17,6 @@ export class Sous_Categorie {
   Depense: boolean;
 
   @Column()
-  Revenu: boolean;
-
-  @Column()
   Date: Date;
 
   @Column()

@@ -20,9 +20,6 @@ export class Categorie {
   Depense: boolean;
 
   @Column()
-  Revenu: boolean;
-
-  @Column()
   Couleur: string;
 
   @ManyToOne(() => User, (user) => user.categorie)
