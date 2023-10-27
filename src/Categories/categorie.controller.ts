@@ -5,7 +5,8 @@ import {
   Post,
   HttpCode,
   HttpStatus,
-  UseGuards, Query
+  UseGuards,
+  Query, Delete
 } from "@nestjs/common";
 import { Categorie } from './categorie.model';
 import { CategoriesService } from './categorie.service';
