@@ -6,8 +6,11 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
-  Query, Delete, Param
-} from "@nestjs/common";
+  Query,
+  Delete,
+  Param,
+  Put,
+} from '@nestjs/common';
 import { Categorie } from './categorie.model';
 import { CategoriesService } from './categorie.service';
 import { AuthGuard } from '../auth/aut.guard';
@@ -35,5 +38,16 @@ export class CategoriesController {
   async deleteCategorie(@Param('id') CategorieId: number) {
     await this.categoriesService.deleteCategorie(CategorieId);
     return { message: 'Categorie supprimée avec succès !' };
+  }
+
+  @Put(':id')
+  async updateCategorie(
+    @Param('id') cartegorieId: number,
+    @Body() updatedCategorieData: Categorie,
+  ): Promise<Categorie> {
+    return this.categoriesService.updateCategorie(
+      cartegorieId,
+      updatedCategorieData,
+    );
   }
 }
