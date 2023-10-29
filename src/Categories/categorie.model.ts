@@ -25,6 +25,10 @@ export class Categorie {
   @ManyToOne(() => User, (user) => user.categorie)
   user: User;
 
-  @OneToMany(() => Sous_Categorie, (sous_categorie) => sous_categorie.categorie)
+  @OneToMany(
+    () => Sous_Categorie,
+    (sous_categorie) => sous_categorie.categorie,
+    { onDelete: 'CASCADE' },
+  )
   sous_categorie: Sous_Categorie[];
 }
