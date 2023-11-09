@@ -6,12 +6,13 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
-  Query, Delete, Param
+  Query, Delete, Param, Put
 } from "@nestjs/common";
 import { Sous_Categorie } from './sous-categorie.model';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { SousCategoriesService } from './sous-categorie.service';
 import { AuthGuard } from '../auth/aut.guard';
+import { Categorie } from "../Categories/categorie.model";
 
 @Controller('sous-categories')
 export class SousCategoriesController {
@@ -36,5 +37,16 @@ export class SousCategoriesController {
   async deleteSousCategorie(@Param('id') sousCategorieId: number) {
     await this.SousCategoriesService.deleteSousCategorie(sousCategorieId);
     return { message: 'Sous-categorie supprimée avec succès !' };
+  }
+
+  @Put(':id')
+  async updateSousCategorie(
+    @Param('id') sousCartegorieId: number,
+    @Body() updatedSousCategorieData: Sous_Categorie,
+  ): Promise<Sous_Categorie> {
+    return this.SousCategoriesService.updateSousCategorie(
+      sousCartegorieId,
+      updatedSousCategorieData,
+    );
   }
 }

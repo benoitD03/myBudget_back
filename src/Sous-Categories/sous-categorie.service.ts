@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, Repository } from 'typeorm';
+import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { Sous_Categorie } from './sous-categorie.model';
+import { Categorie } from "../Categories/categorie.model";
 
 @Injectable()
 export class SousCategoriesService {
@@ -35,5 +36,25 @@ export class SousCategoriesService {
       );
     }
     await this.Sous_Categories.delete(sousCategorieId);
+  }
+
+  async updateSousCategorie(sousCategorieId: number, updatedSousCategorieData: Sous_Categorie): Promise<Sous_Categorie> {
+
+    const options: FindOneOptions = {
+      where: { id_Sous_Categorie: sousCategorieId },
+    };
+
+    const sousCategorie = await this.Sous_Categories.findOne(options);
+
+    if (!sousCategorie) {
+      throw new NotFoundException(
+        `Aucune categorie avec l'id ${sousCategorieId} trouvée.`,
+      );
+    }
+
+    Object.assign(sousCategorie, updatedSousCategorieData);
+
+    const updatedSousCategorie = await this.Sous_Categories.save(sousCategorie);
+    return updatedSousCategorie;
   }
 }
