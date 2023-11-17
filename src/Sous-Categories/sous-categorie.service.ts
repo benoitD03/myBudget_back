@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
+import { Between, FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { Sous_Categorie } from './sous-categorie.model';
 import { Categorie } from "../Categories/categorie.model";
 
@@ -17,6 +17,17 @@ export class SousCategoriesService {
     };
     const result = await this.Sous_Categories.find(options);
     return result;
+  }
+
+  async findAllByCategorieIdAndMonth(categorieId: number, year: number, month: number): Promise<Sous_Categorie[] | undefined> {
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0);
+
+    const options = {
+      where: { categorie: { id_Categorie: categorieId }, Date: Between(startDate, endDate) },
+    };
+
+    return this.Sous_Categories.find(options);
   }
 
   async createSousCategorie(sousCategorieData: Sous_Categorie): Promise<any> {
