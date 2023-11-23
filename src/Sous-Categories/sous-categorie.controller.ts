@@ -40,11 +40,10 @@ export class SousCategoriesController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
   @Get('by-year')
-  async findAllByCategoryAndYear(@Query() query): Promise<Sous_Categorie[] | undefined> {
-    const { categorieId, year } = query;
-    return this.SousCategoriesService.findAllByCategorieIdAndYear(
-      categorieId,
-      year,
+  async findAllByYear(@Query() query): Promise<Sous_Categorie[] | undefined> {
+    const { year } = query;
+    return this.SousCategoriesService.findAllByYear(
+      year
     );
   }
 
