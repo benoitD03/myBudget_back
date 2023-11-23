@@ -39,6 +39,17 @@ export class SousCategoriesController {
 
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
+  @Get('by-year')
+  async findAllByCategoryAndYear(@Query() query): Promise<Sous_Categorie[] | undefined> {
+    const { categorieId, year } = query;
+    return this.SousCategoriesService.findAllByCategorieIdAndYear(
+      categorieId,
+      year,
+    );
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard)
   @Post()
   createCategorie(@Body() sousCategorieData: Sous_Categorie): Promise<any> {
     return this.SousCategoriesService.createSousCategorie(sousCategorieData);

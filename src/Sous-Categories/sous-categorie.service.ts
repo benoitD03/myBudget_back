@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { Sous_Categorie } from './sous-categorie.model';
-import { Categorie } from "../Categories/categorie.model";
 
 @Injectable()
 export class SousCategoriesService {
@@ -11,6 +10,10 @@ export class SousCategoriesService {
     public Sous_Categories: Repository<Sous_Categorie>,
   ) {}
 
+  /**
+   * Méthode de récupération de sous catégorie en fonction de l'id de sa catégorie
+   * @param categorieId
+   */
   async findAllByCategorieId(categorieId: number): Promise<Sous_Categorie[] | undefined> {
     const options: FindManyOptions = {
       where: { categorie: categorieId },
@@ -19,6 +22,10 @@ export class SousCategoriesService {
     return result;
   }
 
+  /**
+   * Méthode de récupération de sous catégorie en fonction de l'id de sa catégorie et d'un mois de l'année
+   * @param categorieId
+   */
   async findAllByCategorieIdAndMonth(categorieId: number, year: number, month: number): Promise<Sous_Categorie[] | undefined> {
     const startDate = new Date(year, month - 1, 1);
     const endDate = new Date(year, month, 0);
@@ -30,11 +37,34 @@ export class SousCategoriesService {
     return this.Sous_Categories.find(options);
   }
 
+  /**
+   * Méthode de récupération de sous catégorie en fonction de l'id de sa catégorie et d'un mois de l'année
+   * @param categorieId
+   */
+  async findAllByCategorieIdAndYear(categorieId: number, year: number): Promise<Sous_Categorie[] | undefined> {
+    const startDate = new Date(year, 0, 1);
+    const endDate = new Date(year, 11, 31);
+
+    const options = {
+      where: { categorie: { id_Categorie: categorieId }, Date: Between(startDate, endDate) },
+    };
+
+    return this.Sous_Categories.find(options);
+  }
+
+  /**
+   * Méthode de création d'une sous catégorie
+   * @param categorieId
+   */
   async createSousCategorie(sousCategorieData: Sous_Categorie): Promise<any> {
     const sousCategorie = this.Sous_Categories.create(sousCategorieData);
     return this.Sous_Categories.save(sousCategorie);
   }
 
+  /**
+   * Méthode de suppression d'une sous catégorie
+   * @param sousCategorieId
+   */
   async deleteSousCategorie(sousCategorieId: number): Promise<void> {
     const options: FindManyOptions = {
       where: { id_Sous_Categorie: sousCategorieId },
@@ -49,6 +79,11 @@ export class SousCategoriesService {
     await this.Sous_Categories.delete(sousCategorieId);
   }
 
+  /**
+   * Méthode de modification d'une sous catégorie
+   * @param sousCategorieId
+   * @param updatedSousCategorieData
+   */
   async updateSousCategorie(sousCategorieId: number, updatedSousCategorieData: Sous_Categorie): Promise<Sous_Categorie> {
 
     const options: FindOneOptions = {
