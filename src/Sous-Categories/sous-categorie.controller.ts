@@ -42,9 +42,7 @@ export class SousCategoriesController {
   @Get('by-year')
   async findAllByYear(@Query() query): Promise<Sous_Categorie[] | undefined> {
     const { year } = query;
-    return this.SousCategoriesService.findAllByYear(
-      year
-    );
+    return this.SousCategoriesService.findAllByYear(year);
   }
 
   @HttpCode(HttpStatus.OK)
