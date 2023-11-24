@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import { User } from '../Users/user.model';
 import { Categorie } from '../Categories/categorie.model';
 
@@ -29,5 +29,6 @@ export class Sous_Categorie {
   user: User;
 
   @ManyToOne(() => Categorie, (categorie) => categorie.sous_categorie)
+  @JoinColumn({ name: 'categorieIdCategorie' })
   categorie: Categorie;
 }

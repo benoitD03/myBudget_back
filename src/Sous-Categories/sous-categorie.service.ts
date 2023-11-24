@@ -46,6 +46,7 @@ export class SousCategoriesService {
 
     const options = {
       where: { Date: Between(startDate, endDate) },
+      relations: ['categorie'],
     };
 
     return this.Sous_Categories.find(options);
