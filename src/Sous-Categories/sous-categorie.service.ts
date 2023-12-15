@@ -40,12 +40,12 @@ export class SousCategoriesService {
   /**
    * Méthode de récupération de sous catégorie en fonction d'un mois de l'année
    */
-  async findAllByMonth(year: number, month: number): Promise<Sous_Categorie[] | undefined> {
+  async findAllByMonth(year: number, month: number, id_User:number): Promise<Sous_Categorie[] | undefined> {
     const startDate = new Date(year, month - 1, 1);
     const endDate = new Date(year, month, 0);
 
     const options = {
-      where: { Date: Between(startDate, endDate) },
+      where: { Date: Between(startDate, endDate), user: { id_User: id_User } },
     };
 
     return this.Sous_Categories.find(options);

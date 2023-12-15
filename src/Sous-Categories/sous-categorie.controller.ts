@@ -41,11 +41,8 @@ export class SousCategoriesController {
   @UseGuards(AuthGuard)
   @Get('all-by-month')
   async findAllByMonth(@Query() query): Promise<Sous_Categorie[] | undefined> {
-    const { year, month } = query;
-    return this.SousCategoriesService.findAllByMonth(
-      year,
-      month,
-    );
+    const { year, month, id_User } = query;
+    return this.SousCategoriesService.findAllByMonth(year, month, id_User);
   }
 
   @HttpCode(HttpStatus.OK)
