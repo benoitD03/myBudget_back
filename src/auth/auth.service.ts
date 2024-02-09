@@ -1,6 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../Users/user.service';
 import { JwtService } from '@nestjs/jwt';
+import * as process from 'process';
 
 @Injectable()
 export class AuthService {
@@ -10,13 +11,14 @@ export class AuthService {
   ) {}
 
   async signIn(email: string, pass: string): Promise<any> {
+    console.log(process.env);
     const user = await this.usersService.findOne(email);
     if (user?.Password !== pass) {
       throw new UnauthorizedException('Mot de passe incorrect');
     }
     const payload = { sub: user.id_User, email: user.Email };
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token: await this.jwtService.signAsync(payload, { secret: process.env.TOKEN_SECRET }),
       id_User: user.id_User,
       name: user.Prenom + ' ' + user.Nom,
     };
