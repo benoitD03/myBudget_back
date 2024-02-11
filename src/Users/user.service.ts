@@ -22,4 +22,18 @@ export class UsersService {
     const result = await this.users.findOne(options);
     return result;
   }
+
+  async create(
+    email: string,
+    password: string,
+    prenom: string,
+    nom: string,
+  ): Promise<User> {
+    const user = new User();
+    user.Email = email;
+    user.Password = password;
+    user.Prenom = prenom;
+    user.Nom = nom;
+    return this.users.save(user);
+  }
 }

@@ -11,14 +11,11 @@ import { AuthModule } from './auth/auth.module';
 import { CategorieModule } from './Categories/categorie.module';
 import { SousCategorieModule } from './Sous-Categories/sous-categorie.module';
 import { ConfigModule } from '@nestjs/config';
-import * as process from "process";
+// import * as process from "process";
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: '.env',
-    }),
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
