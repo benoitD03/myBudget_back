@@ -55,7 +55,7 @@ export class SousCategoriesController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
   @Post()
-  createCategorie(@Body() sousCategorieData: Sous_Categorie): Promise<any> {
+  createSousCategorie(@Body() sousCategorieData: Sous_Categorie): Promise<any> {
     return this.SousCategoriesService.createSousCategorie(sousCategorieData);
   }
 
