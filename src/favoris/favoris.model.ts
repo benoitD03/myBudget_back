@@ -5,7 +5,7 @@ import { Categorie } from '../Categories/categorie.model';
 @Entity()
 export class Favoris {
   @PrimaryGeneratedColumn()
-  id_favori: number;
+  id_Favori: number;
 
   @Column()
   Nom: string;
