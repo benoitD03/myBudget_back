@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
 import { User } from '../Users/user.model';
 import { Sous_Categorie } from '../Sous-Categories/sous-categorie.model';
+import { Favoris } from "../favoris/favoris.model";
 
 @Entity()
 export class Categorie {
@@ -31,4 +32,11 @@ export class Categorie {
     { onDelete: 'CASCADE' },
   )
   sous_categorie: Sous_Categorie[];
+
+  @OneToMany(
+    () => Favoris,
+    (favoris) => favoris.categorie,
+    { onDelete: 'CASCADE' },
+  )
+  favoris: Favoris[];
 }

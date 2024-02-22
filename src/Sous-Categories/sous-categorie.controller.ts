@@ -7,12 +7,11 @@ import {
   HttpStatus,
   UseGuards,
   Query, Delete, Param, Put
-} from "@nestjs/common";
+} from '@nestjs/common';
 import { Sous_Categorie } from './sous-categorie.model';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { SousCategoriesService } from './sous-categorie.service';
 import { AuthGuard } from '../auth/aut.guard';
-import { Categorie } from "../Categories/categorie.model";
 
 @Controller('sous-categories')
 export class SousCategoriesController {

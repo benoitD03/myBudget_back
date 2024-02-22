@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { CategorieModule } from './Categories/categorie.module';
 import { SousCategorieModule } from './Sous-Categories/sous-categorie.module';
 import { ConfigModule } from '@nestjs/config';
+import { Favoris } from './favoris/favoris.model';
 // import * as process from "process";
 
 @Module({
@@ -23,7 +24,7 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User, Categorie, Sous_Categorie],
+      entities: [User, Categorie, Sous_Categorie, Favoris],
       synchronize: true, // Utilisez "false" en production
     }),
     UserModule,
