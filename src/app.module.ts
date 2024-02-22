@@ -25,7 +25,7 @@ import { Favoris } from './favoris/favoris.model';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [User, Categorie, Sous_Categorie, Favoris],
-      synchronize: true, // Utilisez "false" en production
+      synchronize: false, // Utilisez "false" en production
     }),
     UserModule,
     AuthModule,
