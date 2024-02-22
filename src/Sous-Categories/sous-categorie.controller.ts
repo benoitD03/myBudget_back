@@ -59,6 +59,13 @@ export class SousCategoriesController {
     return this.SousCategoriesService.createSousCategorie(sousCategorieData);
   }
 
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard)
+  @Post('multiple')
+  async createMultipleSousCategories(@Body() sousCategoriesData: Sous_Categorie[]) {
+    return this.SousCategoriesService.createMultipleSousCategories(sousCategoriesData);
+  }
+
   @UseGuards(AuthGuard)
   @Delete(':id')
   async deleteSousCategorie(@Param('id') sousCategorieId: number) {
