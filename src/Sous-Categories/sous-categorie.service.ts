@@ -120,4 +120,13 @@ export class SousCategoriesService {
     const updatedSousCategorie = await this.Sous_Categories.save(sousCategorie);
     return updatedSousCategorie;
   }
+
+  /**
+   * Méthode de création de plusieurs sous catégories
+   * @param sousCategoriesData
+   */
+  async createMultipleSousCategories(sousCategoriesData: Sous_Categorie[]): Promise<any> {
+    const sousCategories = this.Sous_Categories.create(sousCategoriesData);
+    return this.Sous_Categories.save(sousCategories);
+  }
 }

@@ -9,12 +9,11 @@ import {
   Post,
   Put,
   Query,
-  UseGuards
-} from "@nestjs/common";
+  UseGuards,
+} from '@nestjs/common';
 import { FavorisService } from './favoris.service';
-import { AuthGuard } from "../auth/aut.guard";
-import { Favoris } from "./favoris.model";
-import { Categorie } from "../Categories/categorie.model";
+import { AuthGuard } from '../auth/aut.guard';
+import { Favoris } from './favoris.model';
 
 @Controller('favoris')
 export class FavorisController {
@@ -50,9 +49,6 @@ export class FavorisController {
     @Param('id') favoriId: number,
     @Body() updatedFavoriData: Favoris,
   ): Promise<Favoris> {
-    return this.FavorisService.updateFavori(
-      favoriId,
-      updatedFavoriData,
-    );
+    return this.FavorisService.updateFavori(favoriId, updatedFavoriData);
   }
 }
