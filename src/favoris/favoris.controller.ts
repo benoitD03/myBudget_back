@@ -11,20 +11,20 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { FavorisService } from './favoris.service';
 import { AuthGuard } from '../auth/aut.guard';
 import { Favoris } from './favoris.model';
+import { FavorisService } from './favoris.service';
 
 @Controller('favoris')
 export class FavorisController {
-  constructor(private readonly FavorisService: FavorisService) {}
+  constructor(private favorisService: FavorisService) {}
 
   //GET /favoris/all
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
   @Get('all')
   findAllByUserId(@Query() query): Promise<Favoris[]> {
-    return this.FavorisService.findAllByUserId(query);
+    return this.favorisService.findAllByUserId(query);
   }
 
   //POST /favoris
@@ -32,14 +32,14 @@ export class FavorisController {
   @UseGuards(AuthGuard)
   @Post()
   createFavori(@Body() favoriData: Favoris): Promise<any> {
-    return this.FavorisService.createFavori(favoriData);
+    return this.favorisService.createFavori(favoriData);
   }
 
   //DELETE /favoris/:id
   @UseGuards(AuthGuard)
   @Delete(':id')
   async deleteFavori(@Param('id') favoriId: number) {
-    await this.FavorisService.deleteFavori(favoriId);
+    await this.favorisService.deleteFavori(favoriId);
     return { message: 'Favori supprimée avec succès !' };
   }
 
@@ -49,6 +49,6 @@ export class FavorisController {
     @Param('id') favoriId: number,
     @Body() updatedFavoriData: Favoris,
   ): Promise<Favoris> {
-    return this.FavorisService.updateFavori(favoriId, updatedFavoriData);
+    return this.favorisService.updateFavori(favoriId, updatedFavoriData);
   }
 }

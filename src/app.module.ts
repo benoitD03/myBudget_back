@@ -12,6 +12,7 @@ import { CategorieModule } from './Categories/categorie.module';
 import { SousCategorieModule } from './Sous-Categories/sous-categorie.module';
 import { ConfigModule } from '@nestjs/config';
 import { Favoris } from './favoris/favoris.model';
+import { FavorisModule } from './favoris/favoris.module';
 // import * as process from "process";
 
 @Module({
@@ -31,6 +32,7 @@ import { Favoris } from './favoris/favoris.model';
     AuthModule,
     CategorieModule,
     SousCategorieModule,
+    FavorisModule,
   ],
   controllers: [AppController],
   providers: [AppService],

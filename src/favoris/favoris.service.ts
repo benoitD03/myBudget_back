@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
+import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 import { Favoris } from './favoris.model';
 
 @Injectable()
@@ -13,11 +13,12 @@ export class FavorisService {
   /**
    * Méthode de récupération des favoris d'un utlisateur
    */
-  async findAllByUserId(userId: number): Promise<Favoris[] | undefined> {
+  async findAllByUserId(userId: number): Promise<Favoris[]> {
     const options: FindManyOptions = {
       where: { user: userId },
+      relations: ['categorie'],
     };
-    const result = await this.Favoris.find(options);
+    const result = (await this.Favoris.find(options)) || [];
     return result;
   }
 
@@ -40,9 +41,7 @@ export class FavorisService {
     const favori = await this.Favoris.find(options);
 
     if (!favori) {
-      throw new NotFoundException(
-        `Aucun favori avec l'id ${favoriId} trouvé.`,
-      );
+      throw new NotFoundException(`Aucun favori avec l'id ${favoriId} trouvé.`);
     }
     await this.Favoris.delete(favoriId);
   }
@@ -52,18 +51,18 @@ export class FavorisService {
    * @param favoriId
    * @param updatedFavoriData
    */
-  async updateFavori(favoriId: number, updatedFavoriData: Favoris): Promise<Favoris> {
-
+  async updateFavori(
+    favoriId: number,
+    updatedFavoriData: Favoris,
+  ): Promise<Favoris> {
     const options: FindOneOptions = {
       where: { id_Favori: favoriId },
     };
 
-    const favori= await this.Favoris.findOne(options);
+    const favori = await this.Favoris.findOne(options);
 
     if (!favori) {
-      throw new NotFoundException(
-        `Aucun favori avec l'id ${favoriId} trouvé.`,
-      );
+      throw new NotFoundException(`Aucun favori avec l'id ${favoriId} trouvé.`);
     }
 
     Object.assign(favori, updatedFavoriData);
