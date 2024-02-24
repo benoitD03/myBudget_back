@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
 import { User } from '../Users/user.model';
 import { Sous_Categorie } from '../Sous-Categories/sous-categorie.model';
-import { Favoris } from "../favoris/favoris.model";
+import { Favoris } from '../favoris/favoris.model';
 
 @Entity()
 export class Categorie {

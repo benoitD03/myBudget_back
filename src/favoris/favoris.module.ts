@@ -10,4 +10,4 @@ import { FavorisController } from './favoris.controller';
   providers: [FavorisService],
   exports: [FavorisService],
 })
-export class SousCategorieModule {}
+export class FavorisModule {}
